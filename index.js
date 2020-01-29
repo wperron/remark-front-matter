@@ -15,7 +15,8 @@ async function main() {
     return files.filter(f => f.match(/\.md$/g))
   })
 
-  files.forEach(async file => {
+  let posts = []
+  for await (const file of files) {
     const content = await aReadFile(`./content/${file}`, 'utf8').then(async data => {
       return data
     })
@@ -29,9 +30,11 @@ async function main() {
       .then(vfile => {
         return String(vfile)
       })
-  
-    console.log(frontmatter)
-  })
+
+    posts.push(frontmatter)
+  }
+
+  console.log(posts)
 }
 
 main()
