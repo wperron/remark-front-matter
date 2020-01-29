@@ -34,7 +34,9 @@ async function main() {
     posts.push(frontmatter)
   }
 
-  console.log(posts)
+  process.stdout.write(JSON.stringify(posts))
 }
 
-main()
+if (require.main === module) {
+  main()
+}
